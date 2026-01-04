@@ -44,3 +44,51 @@ You don’t have to ever use `eject`. The curated feature set is suitable for sm
 You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
 
 To learn React, check out the [React documentation](https://reactjs.org/).
+
+## SonarQube Integration
+
+This project includes CI/CD integration with SonarQube for code quality and security analysis.
+
+### Prerequisites
+
+To enable SonarQube analysis, you need to configure the following secrets in your GitHub repository:
+
+1. **SONAR_TOKEN**: Your SonarQube authentication token
+2. **SONAR_HOST_URL**: Your SonarQube server URL (e.g., `https://sonarcloud.io` for SonarCloud)
+
+### Configuration
+
+The SonarQube configuration is defined in `sonar-project.properties`. Key settings include:
+
+- **Project Key**: `janwolf9_web-ris`
+- **Sources**: `src` directory
+- **Coverage Reports**: Generated from Jest tests
+- **Exclusions**: node_modules, build artifacts, and test files
+
+### Running Analysis Locally
+
+To run SonarQube analysis locally, you need to:
+
+1. Install the SonarScanner CLI
+2. Set the required environment variables:
+   ```bash
+   export SONAR_TOKEN=your-token
+   export SONAR_HOST_URL=your-sonar-url
+   ```
+3. Run the scanner:
+   ```bash
+   sonar-scanner
+   ```
+
+### CI/CD Workflow
+
+The GitHub Actions workflow (`.github/workflows/sonarqube.yml`) automatically runs on:
+- Pushes to `main` and `develop` branches
+- Pull requests
+
+The workflow performs the following steps:
+1. Checkout code
+2. Install dependencies
+3. Run tests with coverage
+4. Execute SonarQube scan
+5. Check quality gate status
