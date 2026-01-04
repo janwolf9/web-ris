@@ -60,8 +60,7 @@
       "src/**/*.{ts,tsx}",
       "!src/**/*.test.{ts,tsx}",
       "!src/**/*.spec.{ts,tsx}",
-      "!src/index.tsx",
-      "!src/reportWebVitals.ts"
+      "!src/index.tsx"
     ],
     "coverageReporters": [
       "lcov",
