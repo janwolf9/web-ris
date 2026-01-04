@@ -28,19 +28,19 @@ jobs:
         run: npm ci
       
       - name: Run tests with coverage
-        run: npm test -- --coverage --watchAll=false --testResultsProcessor=jest-sonar-reporter
+        run: npm test -- --coverage --watchAll=false
         continue-on-error: true
         env:
           CI: true
       
       - name: SonarQube Scan
-        uses: sonarsource/sonarqube-scan-action@master
+        uses: sonarsource/sonarqube-scan-action@v3.0.0
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
           SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
       
       - name: SonarQube Quality Gate check
-        uses: sonarsource/sonarqube-quality-gate-action@master
+        uses: sonarsource/sonarqube-quality-gate-action@v1.1.0
         timeout-minutes: 5
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
